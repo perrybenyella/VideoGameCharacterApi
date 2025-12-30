@@ -34,8 +34,11 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 // Custom middleware
+Console.WriteLine();
+Console.WriteLine("Registering custom middleware");
 app.UseMiddleware<HelloMiddleware>();
 app.UseMiddleware<RequestContextMiddleware>();
+Console.WriteLine();
 
 app.MapControllers();
 
