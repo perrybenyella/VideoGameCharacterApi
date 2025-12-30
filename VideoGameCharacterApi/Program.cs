@@ -30,7 +30,9 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+// Custom middleware
 app.UseMiddleware<HelloMiddleware>();
+app.UseMiddleware<RequestContextMiddleware>();
 
 app.MapControllers();
 
