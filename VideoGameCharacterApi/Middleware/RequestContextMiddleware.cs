@@ -12,6 +12,8 @@ namespace VideoGameCharacterApi.Middleware
         // DI will supply IRequestContext per request
         public async Task InvokeAsync(HttpContext context, IRequestContext requestContext)
         {
+            Console.WriteLine();
+            Console.WriteLine($"{nameof(RequestContextMiddleware)} invoked!");
             // Add correlation id to response so clients can echo it in logs / bug reports
             context.Response.Headers["X-Correlation-Id"] = requestContext.CorrelationId;
 
