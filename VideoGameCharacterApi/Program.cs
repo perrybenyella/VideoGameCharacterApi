@@ -7,6 +7,9 @@ using VideoGameCharacterApi.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// --- DI registrations ---
+builder.Services.AddHttpContextAccessor();                   // required for RequestContext
+builder.Services.AddScoped<IRequestContext, RequestContext>(); // one per request
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
