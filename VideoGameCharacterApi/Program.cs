@@ -29,11 +29,13 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+
 app.Use(async (context, next) =>
 {
-    Console.WriteLine("Hello from middleware!");
+    Console.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - Hello from middleware!");
     await next();
 });
+
 
 app.MapControllers();
 
