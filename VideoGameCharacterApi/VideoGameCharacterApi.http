@@ -1,14 +1,33 @@
 @VideoGameCharacterApi_HostAddress = https://localhost:7100
+@HTTPS = https://localhost:7100
+@HTTP = http://localhost:5293
 
+### get weather forecast with https
 GET {{VideoGameCharacterApi_HostAddress}}/weatherforecast/
 Accept: application/json
-
 ###
 
+### get weather forecast with http
+GET {{HTTP}}/weatherforecast/
+Accept: application/json
+###
+
+###########################################################################################
+###########################################################################################
+
+### test connection string with https
 GET {{VideoGameCharacterApi_HostAddress}}/api/videogamecharacters/test-connection
-
 ###
 
+### test connection string with http
+GET {{HTTP}}/api/videogamecharacters/test-connection
+###
+
+###########################################################################################
+###########################################################################################
+
+
+### post a video game character with https
 POST {{VideoGameCharacterApi_HostAddress}}/api/videogamecharacters
 Content-Type: application/json
 
@@ -17,9 +36,26 @@ Content-Type: application/json
   "game": "New Game",
   "role": "New Role"
 }
-
 ###
 
-GET {{VideoGameCharacterApi_HostAddress}}/api/videogamecharacters
+### post a video game character with http
+POST {{HTTP}}/api/videogamecharacters
+Content-Type: application/json
+{
+  "name": "New Character",
+  "game": "New Game",
+  "role": "New Role"
+}
+###
 
+###########################################################################################
+###########################################################################################
+
+
+### get all video game characters with https
+GET {{VideoGameCharacterApi_HostAddress}}/api/videogamecharacters
+###
+
+### get all video game characters with http
+GET {{HTTP}}/api/videogamecharacters
 ###
