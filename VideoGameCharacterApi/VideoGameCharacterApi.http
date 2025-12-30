@@ -1,6 +1,25 @@
-@VideoGameCharacterApi_HostAddress = http://localhost:5293
+@VideoGameCharacterApi_HostAddress = https://localhost:7100
 
 GET {{VideoGameCharacterApi_HostAddress}}/weatherforecast/
 Accept: application/json
+
+###
+
+GET {{VideoGameCharacterApi_HostAddress}}/api/videogamecharacters/test-connection
+
+###
+
+POST {{VideoGameCharacterApi_HostAddress}}/api/videogamecharacters
+Content-Type: application/json
+
+{
+  "name": "New Character",
+  "game": "New Game",
+  "role": "New Role"
+}
+
+###
+
+GET {{VideoGameCharacterApi_HostAddress}}/api/videogamecharacters
 
 ###

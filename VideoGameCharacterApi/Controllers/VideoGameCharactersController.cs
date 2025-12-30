@@ -39,4 +39,14 @@ public class VideoGameCharactersController(IVideoGameCharacterService service) :
         var deleted = await service.DeleteCharacterAsync(id);
         return deleted ? NoContent() : NotFound("Character with the given Id was not found.");
     }
+
+    [HttpGet("test-connection")]
+    public async Task<ActionResult<ConnectionCheckResponse>> TestConnectionAsync([FromServices] IVideoGameCharacterService service)
+    {
+        var result = await service.TestConnectionAsync();
+        return result.EfCoreCanConnect && result.RawCanOpen
+            ? Ok(result)
+            : StatusCode(500, result);
+    }
+
 }
