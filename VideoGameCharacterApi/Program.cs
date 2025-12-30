@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using VideoGameCharacterApi.Data;
+using VideoGameCharacterApi.Middleware;
 using VideoGameCharacterApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,12 +30,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-
-app.Use(async (context, next) =>
-{
-    Console.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - Hello from middleware!");
-    await next();
-});
+app.UseMiddleware<HelloMiddleware>();
 
 app.MapControllers();
 
