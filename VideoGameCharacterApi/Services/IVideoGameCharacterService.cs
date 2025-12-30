@@ -9,4 +9,5 @@ public interface IVideoGameCharacterService
     Task<CharacterResponse> AddCharacterAsync(CreateCharacterRequest character);
     Task<bool> UpdateCharacterAsync(int id, UpdateCharacterRequest character);
     Task<bool> DeleteCharacterAsync(int id);
+    Task<ConnectionCheckResponse> TestConnectionAsync();
 }

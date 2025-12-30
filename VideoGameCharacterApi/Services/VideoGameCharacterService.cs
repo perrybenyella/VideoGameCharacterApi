@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using VideoGameCharacterApi.Data;
 using VideoGameCharacterApi.Dtos;
 using VideoGameCharacterApi.Models;
@@ -78,5 +79,49 @@ public class VideoGameCharacterService(AppDbContext context) : IVideoGameCharact
         await context.SaveChangesAsync();
 
         return true;
+    }
+
+    public async Task<ConnectionCheckResponse> TestConnectionAsync()
+    {
+
+        bool efCoreOk = false;
+        bool rawOk = false;
+        string? error = null;
+
+        try
+        {
+            // EF Core layer check: returns true/false (may throw if EF is misconfigured)
+            efCoreOk = await context.Database.CanConnectAsync();
+        }
+        catch (Exception ex)
+        {
+            // EF misconfiguration, provider issues, DI problems, etc.
+            error = $"EF Core CanConnectAsync threw: {ex.Message}";
+            return new ConnectionCheckResponse { EfCoreCanConnect = false, RawCanOpen = false, Error = error };
+        }
+
+        // If EF layer says “false”, still attempt raw to get a more specific exception
+        var cs = context.Database.GetDbConnection().ConnectionString;
+
+        try
+        {
+            // Raw ADO.NET: detailed exceptions on server not found, login failure, TLS, etc.
+            using var conn = new SqlConnection(cs);
+            await conn.OpenAsync();
+            rawOk = true;
+        }
+        catch (Exception ex)
+        {
+            rawOk = false;
+            error = $"SqlConnection.OpenAsync threw: {ex.Message}";
+        }
+
+        return new ConnectionCheckResponse
+        {
+            EfCoreCanConnect = efCoreOk,
+            RawCanOpen = rawOk,
+            Error = error
+        };
+
     }
 }
