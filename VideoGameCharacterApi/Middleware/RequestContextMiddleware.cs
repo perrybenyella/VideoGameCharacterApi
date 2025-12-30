@@ -29,6 +29,7 @@ namespace VideoGameCharacterApi.Middleware
             Console.WriteLine($"Request Start Time (UTC): {requestContext.StartTimeUtc:yyyy-MM-dd HH:mm:ss.fff}");
             Console.WriteLine($"Request Method: {requestContext.Method}");
             Console.WriteLine($"Request Path: {requestContext.Path}");
+            Console.WriteLine($"Correlation ID: {requestContext.CorrelationId}");
             Console.WriteLine($"Is Health or Ping Request: {requestContext.IsHealthOrPing}");
 
             await _next(context); // continue to next middleware / MVC
