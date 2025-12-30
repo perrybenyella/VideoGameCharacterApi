@@ -29,6 +29,12 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.Use(async (context, next) =>
+{
+    Console.WriteLine("Hello from middleware!");
+    await next();
+});
+
 app.MapControllers();
 
 app.Run();
