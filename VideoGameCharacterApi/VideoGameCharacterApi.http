@@ -27,6 +27,18 @@ GET {{HTTP}}/api/videogamecharacters/test-connection
 ###########################################################################################
 
 
+### get all video game characters with https
+GET {{VideoGameCharacterApi_HostAddress}}/api/videogamecharacters
+###
+
+### get all video game characters with http
+GET {{HTTP}}/api/videogamecharacters
+###
+
+###########################################################################################
+###########################################################################################
+
+
 ### post a video game character with https
 POST {{VideoGameCharacterApi_HostAddress}}/api/videogamecharacters
 Content-Type: application/json
@@ -46,16 +58,4 @@ Content-Type: application/json
   "game": "New Game",
   "role": "New Role"
 }
-###
-
-###########################################################################################
-###########################################################################################
-
-
-### get all video game characters with https
-GET {{VideoGameCharacterApi_HostAddress}}/api/videogamecharacters
-###
-
-### get all video game characters with http
-GET {{HTTP}}/api/videogamecharacters
 ###
