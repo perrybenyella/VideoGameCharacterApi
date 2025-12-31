@@ -42,6 +42,8 @@ namespace VideoGameCharacterApi.Middleware
             Console.WriteLine();
 
             await _next(context); // continue to next middleware / MVC
+            Console.WriteLine();
+            Console.WriteLine($"Completed {requestContext.Path} request!");
         }
     }
 }
