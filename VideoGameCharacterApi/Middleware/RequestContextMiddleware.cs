@@ -35,8 +35,11 @@ namespace VideoGameCharacterApi.Middleware
             Console.WriteLine($"Is Health or Ping Request: {requestContext.IsHealthOrPing}");
 
             // check db
+            Console.WriteLine();
             var check = await requestContext.CheckDbAsync();
+            Console.WriteLine();
             Console.WriteLine($"DB Check → EF: {check.EfCoreCanConnect}, Raw: {check.RawCanOpen}, Error: {check.Error ?? "none"}");
+            Console.WriteLine();
 
             await _next(context); // continue to next middleware / MVC
         }
