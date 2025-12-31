@@ -1,8 +1,11 @@
 ﻿
+using VideoGameCharacterApi.Dtos;
+
 namespace VideoGameCharacterApi.Services
 {
     public class RequestContext : IRequestContext
     {
+        private readonly IVideoGameCharacterService _characters;  // <-- injected service
         public string Method { get; }
 
         public string Path { get; }
@@ -14,9 +17,10 @@ namespace VideoGameCharacterApi.Services
         public bool IsHealthOrPing { get; }
 
         // Build the context from HttpContext only once per request
-        public RequestContext(IHttpContextAccessor accessor)
+        public RequestContext(IHttpContextAccessor accessor, IVideoGameCharacterService characters)
         {
 
+            _characters = characters;
             var http = accessor.HttpContext ?? throw new InvalidOperationException("No HttpContext.");
 
             Method = http.Request.Method;
@@ -29,5 +33,6 @@ namespace VideoGameCharacterApi.Services
 
         }
 
+        public Task<ConnectionCheckResponse> CheckDbAsync() => _characters.TestConnectionAsync();
     }
 }

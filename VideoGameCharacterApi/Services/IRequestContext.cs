@@ -1,4 +1,6 @@
-﻿namespace VideoGameCharacterApi.Services
+﻿using VideoGameCharacterApi.Dtos;
+
+namespace VideoGameCharacterApi.Services
 {
     public interface IRequestContext
     {
@@ -9,6 +11,11 @@
 
         // Small helper: health/ping skip
         bool IsHealthOrPing { get; }
+
+
+        // Minimal, useful capability backed by IVideoGameCharacterService
+        Task<ConnectionCheckResponse> CheckDbAsync();
+
 
     }
 }

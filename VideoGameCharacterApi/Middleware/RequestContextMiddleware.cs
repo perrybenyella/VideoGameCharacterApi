@@ -34,6 +34,10 @@ namespace VideoGameCharacterApi.Middleware
             Console.WriteLine($"Correlation ID: {requestContext.CorrelationId}");
             Console.WriteLine($"Is Health or Ping Request: {requestContext.IsHealthOrPing}");
 
+            // check db
+            var check = await requestContext.CheckDbAsync();
+            Console.WriteLine($"DB Check → EF: {check.EfCoreCanConnect}, Raw: {check.RawCanOpen}, Error: {check.Error ?? "none"}");
+
             await _next(context); // continue to next middleware / MVC
         }
     }
